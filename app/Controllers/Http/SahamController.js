@@ -246,12 +246,12 @@ class SahamController {
         const kode_emiten = request.input('kode_emiten')
         const EPS_growth = request.input('eps_growth')
 
-        const data = await yahooFinance.quote({
+        const data_single = await yahooFinance.quote({
             symbol: code[i].kode_saham,
             modules: ['price', 'earnings', 'financialData', 'defaultKeyStatistics']  // ex: ['price', 'summaryDetail']
         });
-        const last_price = data.price.regularMarketPrice
-        const EPS = data.defaultKeyStatistics.trailingEps
+        const last_price = data_single.price.regularMarketPrice
+        const EPS = data_single.defaultKeyStatistics.trailingEps
 
         const PER_non_growth_company = 7
         const eps_growth = parseInt(EPS_growth)
