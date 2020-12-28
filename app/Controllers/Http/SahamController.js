@@ -1,7 +1,7 @@
 'use strict'
-const Mail = use('Mail')
-// var yahooFinance = require('yahoo-finance');
-var si = require('stock-info');
+const Mail = use('Mail');
+var yahooFinance = require('yahoo-finance');
+// var si = require('stock-info');
 
 class SahamController {
     async analisisSingleEmiten({ request, view, response, auth }) {
@@ -147,8 +147,8 @@ class SahamController {
             const harga_wajar = calc_harga_wajar - (calc_harga_wajar * 50 / 100)
             return parseInt(harga_wajar)
         }
-          //asumsi eps growth 40% stabil
-          function hrgWjr40(EPS) {
+        //asumsi eps growth 40% stabil
+        function hrgWjr40(EPS) {
             const PER_non_growth_company = 7
             const eps_growth = 40
             const deposito_indo = 6.5
@@ -157,8 +157,8 @@ class SahamController {
             const harga_wajar = calc_harga_wajar - (calc_harga_wajar * 50 / 100)
             return parseInt(harga_wajar)
         }
-          //asumsi eps growth 50% stabil
-          function hrgWjr50(EPS) {
+        //asumsi eps growth 50% stabil
+        function hrgWjr50(EPS) {
             const PER_non_growth_company = 7
             const eps_growth = 50
             const deposito_indo = 6.5
@@ -168,10 +168,19 @@ class SahamController {
             return parseInt(harga_wajar)
         }
         for (var i = 0; i < code.length; i++) {
-            const data = await si.getSingleStockInfo(code[i].kode_saham)
-            const last_price = data.regularMarketPrice
+            const data = await yahooFinance.quote({
+                symbol: code[i].kode_saham,
+                modules: ['price', 'earnings', 'financialData', 'defaultKeyStatistics']  // ex: ['price', 'summaryDetail']
+            });
+            const last_price = data.price.regularMarketPrice
+            const EPS = data.defaultKeyStatistics.trailingEps
+            const DER = data.financialData.debtToEquity
+
+            // const data = await si.getSingleStockInfo(code[i].kode_saham)
+            // const last_price = data.regularMarketPrice
+            // const EPS = data.epsTrailingTwelveMonths
+
             const code_saham = code[i].kode_saham
-            const EPS = data.epsTrailingTwelveMonths
 
             //memanggil fungsi
             const harga_wajar_10 = hrgWjr10(EPS)
@@ -183,7 +192,7 @@ class SahamController {
             //low
             if (last_price < harga_wajar_10) {
                 var status = "UNDERVALUED"
-                const undervalued = { "last_price": last_price, "harga_wajar": harga_wajar_10, "code_saham": code_saham, "status": status }
+                const undervalued = { "last_price": last_price, "harga_wajar": harga_wajar_10, "code_saham": code_saham, "der": DER, "status": status }
                 undervalued_sum_10.push(undervalued)
             } else {
                 var status = "OVERVALUED"
@@ -192,7 +201,7 @@ class SahamController {
             //medium
             if (last_price < harga_wajar_20) {
                 var status = "UNDERVALUED"
-                const undervalued = { "last_price": last_price, "harga_wajar": harga_wajar_20, "code_saham": code_saham, "status": status }
+                const undervalued = { "last_price": last_price, "harga_wajar": harga_wajar_20, "code_saham": code_saham, "der": DER, "status": status }
                 undervalued_sum_20.push(undervalued)
             } else {
                 var status = "OVERVALUED"
@@ -201,25 +210,25 @@ class SahamController {
             //high
             if (last_price < harga_wajar_30) {
                 var status = "UNDERVALUED"
-                const undervalued = { "last_price": last_price, "harga_wajar": harga_wajar_30, "code_saham": code_saham, "status": status }
+                const undervalued = { "last_price": last_price, "harga_wajar": harga_wajar_30, "code_saham": code_saham, "der": DER, "status": status }
                 undervalued_sum_30.push(undervalued)
             } else {
                 var status = "OVERVALUED"
             }
 
-             //high
-             if (last_price < harga_wajar_40) {
+            //high
+            if (last_price < harga_wajar_40) {
                 var status = "UNDERVALUED"
-                const undervalued = { "last_price": last_price, "harga_wajar": harga_wajar_40, "code_saham": code_saham, "status": status }
+                const undervalued = { "last_price": last_price, "harga_wajar": harga_wajar_40, "code_saham": code_saham, "der": DER, "status": status }
                 undervalued_sum_40.push(undervalued)
             } else {
                 var status = "OVERVALUED"
             }
 
-             //high
-             if (last_price < harga_wajar_50) {
+            //high
+            if (last_price < harga_wajar_50) {
                 var status = "UNDERVALUED"
-                const undervalued = { "last_price": last_price, "harga_wajar": harga_wajar_50, "code_saham": code_saham, "status": status }
+                const undervalued = { "last_price": last_price, "harga_wajar": harga_wajar_50, "code_saham": code_saham, "der": DER, "status": status }
                 undervalued_sum_50.push(undervalued)
             } else {
                 var status = "OVERVALUED"
@@ -237,11 +246,12 @@ class SahamController {
         const kode_emiten = request.input('kode_emiten')
         const EPS_growth = request.input('eps_growth')
 
-        const yf = await si.getSingleStockInfo(kode_emiten)
-        const last_price = yf.regularMarketPrice
-        const EPS = parseInt(yf.epsTrailingTwelveMonths)
-
-
+        const data = await yahooFinance.quote({
+            symbol: code[i].kode_saham,
+            modules: ['price', 'earnings', 'financialData', 'defaultKeyStatistics']  // ex: ['price', 'summaryDetail']
+        });
+        const last_price = data.price.regularMarketPrice
+        const EPS = data.defaultKeyStatistics.trailingEps
 
         const PER_non_growth_company = 7
         const eps_growth = parseInt(EPS_growth)
@@ -263,7 +273,15 @@ class SahamController {
     }
 
     async price({ request, view, response, auth }) {
-
+        // const data = await si.getSingleStockInfo('MNCN.JK')
+        // const data = yahoo.earningsGrowth('MNCN.JK')
+        const data = await yahooFinance.quote({
+            symbol: 'BMTR.JK',
+            modules: ['price', 'earnings', 'financialData', 'defaultKeyStatistics']  // ex: ['price', 'summaryDetail']
+        });
+        return response.json({
+            data
+        })
         const code = [
             { "kode_saham": "AALI.JK" },
             { "kode_saham": "ACES.JK" },
