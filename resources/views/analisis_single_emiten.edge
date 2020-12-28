@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+
+    <title>Saham Kampung</title>
+</head>
+<body>
+    
+    <div class="container" style="text-align:center"> 
+      <br>
+      <h1>Analisis Single Emiten</h1>
+    </div>
+
+      <div class="container" >
+        <button class="btn btn-secondary" onclick="location.href='/'" style="background-color:transparent">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="black" class="bi bi-arrow-left" viewBox="0 0 16 16">
+          <path fill-rule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z"/>
+          </svg>
+        </button>
+        
+        <br>
+        <br>
+        <form method="POST" action="/analisis-single-emiten">
+            <div class="form-group">
+          <label for="exampleInputEmail1">Kode Emiten</label>
+          <input class="form-control" type="text" name="kode_emiten"  placeholder="contoh : BBCA.JK">
+        </div>
+        <div class="form-group">
+          <label for="exampleInputPassword1">Peningkatan % EPS Emiten 5 Tahun Terakhir</label>
+          <input class="form-control" type="number" name="eps_growth" placeholder="contoh : 10">
+        </div>
+        <br>
+        <div style="text-align:center">
+          <button type="submit" class="btn btn-secondary">Submit</button>
+        </div>
+      </form>
+      </div>
+      <br>
+      <div class="container">
+        <div class="table-responsive-xl">
+            <h3>User Input</h3>
+          <table class="table">
+              <thead>
+                <tr>
+                  <th scope="col">#</th>
+                  <th scope="col">Parameter</th>
+                  <th scope="col">Nilai</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <th scope="row">1</th>
+                  <td class="col-md-5">Kode Emiten</td>
+                  <td class="col-md-5">{{data.kode_emiten}}</td>
+                </tr>
+                <tr>
+                  <th scope="row">2</th>
+                  <td class="col-md-5">EPS 5 Years Growth</td>
+                  <td class="col-md-5">{{data.EPS_growth}}</td>
+                </tr>
+              </tbody>
+            </table>
+        </div>  
+    </div>
+      <div class="container">
+        <div class="table-responsive-xl">
+            <h3>System Output</h3>
+          <table class="table">
+              <thead>
+                <tr>
+                  <th scope="col">#</th>
+                  <th scope="col">Parameter</th>
+                  <th scope="col">Nilai</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <th scope="row">1</th>
+                  <td class="col-md-5">Harga Terakhir </td>
+                  <td class="col-md-5">{{data.last_price}}</td>
+                </tr>
+                <tr>
+                  <th scope="row">2</th>
+                  <td class="col-md-5">Harga Wajar</td>
+                  <td> {{data.harga_wajar}}</td>
+                </tr>
+                <tr>
+                    <th scope="row">3</th>
+                    <td class="col-md-5">EPS TTM</td>
+                    <td class="col-md-5">{{data.EPS}}</td>
+                  </tr>
+              </tbody>
+            </table>
+        </div>
+    </div>
+
+</body>
+</html>

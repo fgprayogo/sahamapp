@@ -1,0 +1,39 @@
+<h1> UNDERVALUED STOCK IS COMING</h1>
+<h2>Low Risk</h2>
+<p>Recheck EPS Growth >= 10%</p>
+<br/>
+@each(item in undervalued_sum_low)
+    <ul>
+<li>{{item.code_saham}}</li>
+  <p>Harga Terakhir : {{item.last_price}}</p>
+  <p>Harga Wajar : {{item.harga_wajar}}</p>
+  <p>Status : {{item.status}}</p>
+    </ul>
+    <br/>
+@endeach
+
+<h2>Medium Risk</h2>
+<p>Recheck EPS Growth >= 20%</p>
+<br/>
+@each(item in undervalued_sum_medium)
+    <ul>
+<li>{{item.code_saham}}</li>
+  <p>Harga Terakhir : {{item.last_price}}</p>
+  <p>Harga Wajar : {{item.harga_wajar}}</p>
+  <p>Status : {{item.status}}</p>
+    </ul>
+    <br/>
+@endeach
+
+<h2>High Risk</h2>
+<p>Recheck EPS Growth >= 30%</p>
+<br/>
+@each(item in undervalued_sum_high)
+    <ul>
+<li>{{item.code_saham}}</li>
+  <p>Harga Terakhir : {{item.last_price}}</p>
+  <p>Harga Wajar : {{item.harga_wajar}}</p>
+  <p>Status : {{item.status}}</p>
+    </ul>
+    <br/>
+@endeach
