@@ -1,7 +1,7 @@
 'use strict'
 const Mail = use('Mail');
 var yahooFinance = require('yahoo-finance');
-// var si = require('stock-info');
+var si = require('stock-info');
 
 class SahamController {
     async analisisSingleEmiten({ request, view, response, auth }) {
