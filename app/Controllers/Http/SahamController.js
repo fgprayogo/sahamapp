@@ -247,7 +247,7 @@ class SahamController {
         const EPS_growth = request.input('eps_growth')
 
         const data_single = await yahooFinance.quote({
-            symbol: code[i].kode_saham,
+            symbol: kode_emiten,
             modules: ['price', 'earnings', 'financialData', 'defaultKeyStatistics']  // ex: ['price', 'summaryDetail']
         });
         const last_price = data_single.price.regularMarketPrice
