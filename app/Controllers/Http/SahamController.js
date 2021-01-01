@@ -192,7 +192,8 @@ class SahamController {
             //low
             if (last_price < harga_wajar_10) {
                 var status = "UNDERVALUED"
-                const undervalued = { "last_price": last_price, "harga_wajar": harga_wajar_10, "code_saham": code_saham, "der": DER, "status": status }
+                const persentase_kemurahan = ((harga_wajar_10/last_price)-1)*100
+                const undervalued = { "last_price": last_price, "harga_wajar": harga_wajar_10, "code_saham": code_saham, "persentase_kemurahan": parseInt(persentase_kemurahan), "status": status }
                 undervalued_sum_10.push(undervalued)
             } else {
                 var status = "OVERVALUED"
@@ -201,7 +202,8 @@ class SahamController {
             //medium
             if (last_price < harga_wajar_20) {
                 var status = "UNDERVALUED"
-                const undervalued = { "last_price": last_price, "harga_wajar": harga_wajar_20, "code_saham": code_saham, "der": DER, "status": status }
+                const persentase_kemurahan = ((harga_wajar_20/last_price)-1)*100
+                const undervalued = { "last_price": last_price, "harga_wajar": harga_wajar_20, "code_saham": code_saham, "persentase_kemurahan": parseInt(persentase_kemurahan), "status": status }
                 undervalued_sum_20.push(undervalued)
             } else {
                 var status = "OVERVALUED"
@@ -210,7 +212,8 @@ class SahamController {
             //high
             if (last_price < harga_wajar_30) {
                 var status = "UNDERVALUED"
-                const undervalued = { "last_price": last_price, "harga_wajar": harga_wajar_30, "code_saham": code_saham, "der": DER, "status": status }
+                const persentase_kemurahan = ((harga_wajar_30/last_price)-1)*100
+                const undervalued = { "last_price": last_price, "harga_wajar": harga_wajar_30, "code_saham": code_saham, "persentase_kemurahan": parseInt(persentase_kemurahan), "status": status }
                 undervalued_sum_30.push(undervalued)
             } else {
                 var status = "OVERVALUED"
@@ -219,7 +222,8 @@ class SahamController {
             //high
             if (last_price < harga_wajar_40) {
                 var status = "UNDERVALUED"
-                const undervalued = { "last_price": last_price, "harga_wajar": harga_wajar_40, "code_saham": code_saham, "der": DER, "status": status }
+                const persentase_kemurahan = ((harga_wajar_40/last_price)-1)*100
+                const undervalued = { "last_price": last_price, "harga_wajar": harga_wajar_40, "code_saham": code_saham, "persentase_kemurahan": parseInt(persentase_kemurahan), "status": status }
                 undervalued_sum_40.push(undervalued)
             } else {
                 var status = "OVERVALUED"
@@ -228,7 +232,8 @@ class SahamController {
             //high
             if (last_price < harga_wajar_50) {
                 var status = "UNDERVALUED"
-                const undervalued = { "last_price": last_price, "harga_wajar": harga_wajar_50, "code_saham": code_saham, "der": DER, "status": status }
+                const persentase_kemurahan = ((harga_wajar_50/last_price)-1)*100
+                const undervalued = { "last_price": last_price, "harga_wajar": harga_wajar_50, "code_saham": code_saham, "persentase_kemurahan": parseInt(persentase_kemurahan), "status": status }
                 undervalued_sum_50.push(undervalued)
             } else {
                 var status = "OVERVALUED"
@@ -260,8 +265,10 @@ class SahamController {
         const calc_harga_wajar = (EPS * (PER_non_growth_company + eps_growth) * deposito_indo) / obligasi_indo
         const harga_wajar_float = calc_harga_wajar - (calc_harga_wajar * 50 / 100)
         const harga_wajar = parseInt(harga_wajar_float)
+        const persentase_kemurahan_float = ((harga_wajar/last_price)-1)*100
+        const persentase_kemurahan = parseInt(persentase_kemurahan_float)
 
-        const data = { kode_emiten, EPS_growth, harga_wajar, last_price, EPS }
+        const data = { kode_emiten, EPS_growth, harga_wajar, last_price, EPS, persentase_kemurahan }
 
 
         return view.render('analisis_single_emiten', { data })
@@ -271,7 +278,6 @@ class SahamController {
     async home({ request, view, response, auth }) {
         return view.render('home')
     }
-
     async price({ request, view, response, auth }) {
         // const data = await si.getSingleStockInfo('MNCN.JK')
         // const data = yahoo.earningsGrowth('MNCN.JK')
@@ -474,7 +480,6 @@ class SahamController {
             under_high: undervalued_sum_30
         })
     }
-
     async hrg({ request, view, response, auth }) {
         function hrg() {
             var i = 10
