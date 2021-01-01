@@ -230,14 +230,14 @@ class SahamController {
             }
 
             //high
-            if (last_price < harga_wajar_50) {
-                var status = "UNDERVALUED"
-                const persentase_kemurahan = ((harga_wajar_50/last_price)-1)*100
-                const undervalued = { "last_price": last_price, "harga_wajar": harga_wajar_50, "code_saham": code_saham, "persentase_kemurahan": parseInt(persentase_kemurahan), "status": status }
-                undervalued_sum_50.push(undervalued)
-            } else {
-                var status = "OVERVALUED"
-            }
+            // if (last_price < harga_wajar_50) {
+            //     var status = "UNDERVALUED"
+            //     const persentase_kemurahan = ((harga_wajar_50/last_price)-1)*100
+            //     const undervalued = { "last_price": last_price, "harga_wajar": harga_wajar_50, "code_saham": code_saham, "persentase_kemurahan": parseInt(persentase_kemurahan), "status": status }
+            //     undervalued_sum_50.push(undervalued)
+            // } else {
+            //     var status = "OVERVALUED"
+            // }
         }
         // await Mail.send('undervalued', { undervalued_sum_10, undervalued_sum_20, undervalued_sum_30 }, (message) => {
         //     message.from('energen1995@gmail.com')
