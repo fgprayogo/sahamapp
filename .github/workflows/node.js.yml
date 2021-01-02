@@ -8,13 +8,8 @@ jobs:
   deploy:
     runs-on: ubuntu-18.04
     steps:
-      - uses: actions/checkout@v2                            # 1
-      - uses: actions/checkout@v2                            # 2
-        with:
-          repository: fgprayogo/sahamapp.git # 3
-          token: ${{ secrets.ACCESS_TOKEN }}                # 4
-          path: .github/actions                              # 5
-      - uses: appleboy/ssh-action@v0.1.2
+      - name: Deploy Saham App
+        uses: appleboy/ssh-action@v0.1.2
         with:
           host: ${{secrets.SSH_HOST}}
           username: ${{ secrets.SSH_USERNAME }}
@@ -22,7 +17,7 @@ jobs:
           script: |
             mkdir -p ~/saham-app/ # create a new folder
             cd ~/saham-app/ # navigate into the folder
-            git clone https://github.com/fgprayogo/sahamapp.git app
-            cd app
+            git clone https://github.com/fgprayogo/sahamapp.git # clone the repo into the 'app' folder
+            cd sahamapp # navigate into the repo
             npm install # install dependencies 
             pm2 start server.js # start as a background service.
