@@ -5,10 +5,21 @@ on:
     branches: [ main ]
  
 jobs:
-  echo:
+  deploy:
     runs-on: ubuntu-18.04
     steps:
-      - name: Checkout source code
-        uses: actions/checkout@v2
-      - name: Echo Hello World
-        run: echo "Hello World"
+      - name: Deploy Saham App
+        uses: appleboy/ssh-action@v0.1.2
+        with:
+          host: ${{secrets.SSH_HOST}}
+          username: ${{ secrets.SSH_USERNAME }}
+          password: ${{ secrets.SSH_PASSWORD }}
+          script: |
+            mkdir -p ~/saham-app/ # create a new folder
+            cd ~/saham-app/ # navigate into the folder
+            git clone https://github.com/fgprayogo/sahamapp.git # clone the repo into the 'app' folder
+            ${{ secrets.GITHUB_USERNAME }}
+            ${{ secrets.GITHUB_PASSWORD }}
+            cd saham-app # navigate into the repo
+            npm install # install dependencies 
+            pm2 start server.js # start as a background service.
