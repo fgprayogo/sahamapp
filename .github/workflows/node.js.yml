@@ -17,7 +17,6 @@ jobs:
           script: |
             mkdir -p ~/saham-app/ # create a new folder
             cd ~/saham-app/ # navigate into the folder
-            git clone https://fgprayogo:${{ secrets.ACCESS_TOKEN }}@github.com/fgprayogo/sahamapp.git saham-app# clone the repo into the 'app' folder
-            cd saham-app # navigate into the repo
+            git pull https://${{ secrets.ACCESS_TOKEN }}:x-oauth-basic@github.com/fgprayogo/sahamapp.git
             npm install # install dependencies 
             pm2 start server.js # start as a background service.
