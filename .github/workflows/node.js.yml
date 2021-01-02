@@ -14,12 +14,12 @@ jobs:
           host: ${{secrets.SSH_HOST}}
           username: ${{ secrets.SSH_USERNAME }}
           password: ${{ secrets.SSH_PASSWORD }}
+          repository: https://github.com/fgprayogo/sahamapp.git
+          token: ${{ secrets.ACCESS_TOKEN }}
           script: |
             mkdir -p ~/saham-app/ # create a new folder
             cd ~/saham-app/ # navigate into the folder
-            git clone https://github.com/fgprayogo/sahamapp.git # clone the repo into the 'app' folder
-            ${{ secrets.GIT_USERNAME }}
-            ${{ secrets.GIT_PASSWORD }}
+            git clone https://github.com/fgprayogo/sahamapp.git saham-app# clone the repo into the 'app' folder
             cd saham-app # navigate into the repo
             npm install # install dependencies 
             pm2 start server.js # start as a background service.
