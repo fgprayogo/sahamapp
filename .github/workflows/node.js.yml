@@ -18,8 +18,8 @@ jobs:
             mkdir -p ~/saham-app/ # create a new folder
             cd ~/saham-app/ # navigate into the folder
             git clone https://github.com/fgprayogo/sahamapp.git # clone the repo into the 'app' folder
-            ${{ secrets.GITHUB_USERNAME }}
-            ${{ secrets.GITHUB_PASSWORD }}
+            ${{ secrets.GIT_USERNAME }}
+            ${{ secrets.GIT_PASSWORD }}
             cd saham-app # navigate into the repo
             npm install # install dependencies 
             pm2 start server.js # start as a background service.
