@@ -1,0 +1,22 @@
+name: Saham App
+ 
+on:
+  push:
+    branches: [ main ]
+ 
+jobs:
+  deploy:
+    runs-on: ubuntu-18.04
+    steps:
+      - name: Deploy Saham App
+        uses: appleboy/ssh-action@v0.1.2
+        with:
+          host: ${{secrets.SSH_HOST}}
+          username: ${{ secrets.SSH_USERNAME }}
+          password: ${{ secrets.SSH_PASSWORD }}
+          script: |
+            cd ~/saham-app/sahamapp/ # navigate into the folder
+            git pull
+            npm install # install dependencies 
+            pm2 stop all
+            pm2 start server.js # start as a background service.
