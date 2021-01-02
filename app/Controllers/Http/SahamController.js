@@ -203,8 +203,8 @@ class SahamController {
             //medium
             if (last_price < harga_wajar_20) {
                 var status = "UNDERVALUED"
-                // const persentase_kemurahan = ((harga_wajar_20/last_price)-1)*100
-                const persentase_kemurahan = 10
+                const persentase_kemurahan = ((harga_wajar_20/last_price)-1)*100
+                // const persentase_kemurahan = 10
                 const undervalued = { "last_price": last_price, "harga_wajar": harga_wajar_20, "code_saham": code_saham, "persentase_kemurahan": parseInt(persentase_kemurahan), "status": status }
                 undervalued_sum_20.push(undervalued)
             } else {
@@ -214,8 +214,8 @@ class SahamController {
             //high
             if (last_price < harga_wajar_30) {
                 var status = "UNDERVALUED"
-                // const persentase_kemurahan = ((harga_wajar_30/last_price)-1)*100
-                const persentase_kemurahan = 10
+                const persentase_kemurahan = ((harga_wajar_30/last_price)-1)*100
+                // const persentase_kemurahan = 10
                 const undervalued = { "last_price": last_price, "harga_wajar": harga_wajar_30, "code_saham": code_saham, "persentase_kemurahan": parseInt(persentase_kemurahan), "status": status }
                 undervalued_sum_30.push(undervalued)
             } else {
@@ -225,8 +225,8 @@ class SahamController {
             //high
             if (last_price < harga_wajar_40) {
                 var status = "UNDERVALUED"
-                // const persentase_kemurahan = ((harga_wajar_40/last_price)-1)*100
-                const persentase_kemurahan = 10
+                const persentase_kemurahan = ((harga_wajar_40/last_price)-1)*100
+                // const persentase_kemurahan = 10
                 const undervalued = { "last_price": last_price, "harga_wajar": harga_wajar_40, "code_saham": code_saham, "persentase_kemurahan": parseInt(persentase_kemurahan), "status": status }
                 undervalued_sum_40.push(undervalued)
             } else {
@@ -236,8 +236,8 @@ class SahamController {
             //high
             if (last_price < harga_wajar_50) {
                 var status = "UNDERVALUED"
-                // const persentase_kemurahan = ((harga_wajar_50/last_price)-1)*100
-                const persentase_kemurahan = 10
+                const persentase_kemurahan = ((harga_wajar_50/last_price)-1)*100
+                // const persentase_kemurahan = 10
                 const undervalued = { "last_price": last_price, "harga_wajar": harga_wajar_50, "code_saham": code_saham, "persentase_kemurahan": parseInt(persentase_kemurahan), "status": status }
                 undervalued_sum_50.push(undervalued)
             } else {
