@@ -25,3 +25,4 @@ Route.post('/analisis-single-emiten', 'SahamController.analisisSingleEmitenFind'
 
 Route.get('/api/price', 'SahamController.price')
 Route.get('/api/hrg', 'SahamController.hrg')
+Route.get('/api/epsttm', 'SahamController.epsTtm')
