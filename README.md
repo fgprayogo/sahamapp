@@ -1,4 +1,6 @@
-# Adonis API application
+# Saham App Aplication
+
+Dibuat dengan AdonisJS Framework.
 
 This is the boilerplate for creating an API server in AdonisJs, it comes pre-configured with.
 
@@ -10,19 +12,10 @@ This is the boilerplate for creating an API server in AdonisJs, it comes pre-con
 
 ## Setup
 
-Use the adonis command to install the blueprint
 
-```bash
-adonis new yardstick --api-only
-```
-
-or manually clone the repo and then run `npm install`.
-
-
-### Migrations
-
-Run the following command to run startup migrations.
+1. Clone repo 
+2. Install dependency
 
 ```js
-adonis migration:run
+npm install
 ```
