@@ -185,7 +185,7 @@ class SahamController {
             //low
             if (last_price < harga_wajar_10) {
                 var status = "UNDERVALUED"
-                const persentase_kemurahan = ((harga_wajar_10/last_price)-1)*100
+                const persentase_kemurahan = ((harga_wajar_10 / last_price) - 1) * 100
                 // const persentase_kemurahan = 10
                 const undervalued = { "last_price": last_price, "harga_wajar": harga_wajar_10, "code_saham": code_saham, "persentase_kemurahan": parseInt(persentase_kemurahan), "status": status }
                 undervalued_sum_10.push(undervalued)
@@ -196,7 +196,7 @@ class SahamController {
             //medium
             if (last_price < harga_wajar_20) {
                 var status = "UNDERVALUED"
-                const persentase_kemurahan = ((harga_wajar_20/last_price)-1)*100
+                const persentase_kemurahan = ((harga_wajar_20 / last_price) - 1) * 100
                 // const persentase_kemurahan = 10
                 const undervalued = { "last_price": last_price, "harga_wajar": harga_wajar_20, "code_saham": code_saham, "persentase_kemurahan": parseInt(persentase_kemurahan), "status": status }
                 undervalued_sum_20.push(undervalued)
@@ -207,7 +207,7 @@ class SahamController {
             //high
             if (last_price < harga_wajar_30) {
                 var status = "UNDERVALUED"
-                const persentase_kemurahan = ((harga_wajar_30/last_price)-1)*100
+                const persentase_kemurahan = ((harga_wajar_30 / last_price) - 1) * 100
                 // const persentase_kemurahan = 10
                 const undervalued = { "last_price": last_price, "harga_wajar": harga_wajar_30, "code_saham": code_saham, "persentase_kemurahan": parseInt(persentase_kemurahan), "status": status }
                 undervalued_sum_30.push(undervalued)
@@ -218,7 +218,7 @@ class SahamController {
             //high
             if (last_price < harga_wajar_40) {
                 var status = "UNDERVALUED"
-                const persentase_kemurahan = ((harga_wajar_40/last_price)-1)*100
+                const persentase_kemurahan = ((harga_wajar_40 / last_price) - 1) * 100
                 // const persentase_kemurahan = 10
                 const undervalued = { "last_price": last_price, "harga_wajar": harga_wajar_40, "code_saham": code_saham, "persentase_kemurahan": parseInt(persentase_kemurahan), "status": status }
                 undervalued_sum_40.push(undervalued)
@@ -229,7 +229,7 @@ class SahamController {
             //high
             if (last_price < harga_wajar_50) {
                 var status = "UNDERVALUED"
-                const persentase_kemurahan = ((harga_wajar_50/last_price)-1)*100
+                const persentase_kemurahan = ((harga_wajar_50 / last_price) - 1) * 100
                 // const persentase_kemurahan = 10
                 const undervalued = { "last_price": last_price, "harga_wajar": harga_wajar_50, "code_saham": code_saham, "persentase_kemurahan": parseInt(persentase_kemurahan), "status": status }
                 undervalued_sum_50.push(undervalued)
@@ -263,7 +263,7 @@ class SahamController {
         const calc_harga_wajar = (EPS * (PER_non_growth_company + eps_growth) * obligasi_pemerintah_indo) / obligasi_korporasi_indo
         const harga_wajar_float = calc_harga_wajar - (calc_harga_wajar * 50 / 100)
         const harga_wajar = parseInt(harga_wajar_float)
-        const persentase_kemurahan_float = ((harga_wajar/last_price)-1)*100
+        const persentase_kemurahan_float = ((harga_wajar / last_price) - 1) * 100
         const persentase_kemurahan = parseInt(persentase_kemurahan_float)
 
         const data = { kode_emiten, EPS_growth, harga_wajar, last_price, EPS, persentase_kemurahan }
@@ -275,6 +275,57 @@ class SahamController {
     }
     async home({ request, view, response, auth }) {
         return view.render('home')
+    }
+    async portofolio({ request, view, response, auth }) {
+        let portofolio_galih = [
+            { "kode_emiten": "BMTR.JK", "avg": 296, 'target_price': 670 },
+            { "kode_emiten": "MNCN.JK", "avg": 1165, 'target_price': 1227 },
+            { "kode_emiten": "PNLF.JK", "avg": 246, 'target_price': 319 },
+        ]
+        let portofolio_bagus = [
+            { "kode_emiten": "BMTR.JK", "avg": 294, 'target_price': 670 },
+            { "kode_emiten": "PNLF.JK", "avg": 244, 'target_price': 319 },
+        ]
+        let portofolio_fadil = [
+            { "kode_emiten": "BMTR.JK", "avg": 288, 'target_price': 670 },
+            { "kode_emiten": "PNLF.JK", "avg": 242, 'target_price': 319 },
+        ]
+
+        for (let i = 0; i < portofolio_galih.length; i++) {
+            let data_single = await yahooFinance.quote({
+                symbol: portofolio_galih[i].kode_emiten,
+                modules: ['price', 'earnings', 'financialData', 'defaultKeyStatistics']  // ex: ['price', 'summaryDetail']
+            });
+            let last_price = data_single.price.regularMarketPrice
+            let persentase = ((last_price / portofolio_galih[i].avg) - 1) * 100
+            let persentase_fixed = parseFloat(persentase).toFixed(2)
+
+            Object.assign(portofolio_galih[i], { "last_price": last_price, "persentase": persentase_fixed })
+        }
+        for (let i = 0; i < portofolio_bagus.length; i++) {
+            let data_single = await yahooFinance.quote({
+                symbol: portofolio_bagus[i].kode_emiten,
+                modules: ['price', 'earnings', 'financialData', 'defaultKeyStatistics']  // ex: ['price', 'summaryDetail']
+            });
+            const last_price = data_single.price.regularMarketPrice
+            let persentase = ((last_price / portofolio_bagus[i].avg) - 1) * 100
+            let persentase_fixed = parseFloat(persentase).toFixed(2)
+
+            Object.assign(portofolio_bagus[i], { "last_price": last_price, "persentase": persentase_fixed })
+        }
+        for (let i = 0; i < portofolio_fadil.length; i++) {
+            let data_single = await yahooFinance.quote({
+                symbol: portofolio_fadil[i].kode_emiten,
+                modules: ['price', 'earnings', 'financialData', 'defaultKeyStatistics']  // ex: ['price', 'summaryDetail']
+            });
+            const last_price = data_single.price.regularMarketPrice
+            let persentase = ((last_price / portofolio_fadil[i].avg) - 1) * 100
+            let persentase_fixed = parseFloat(persentase).toFixed(2)
+
+            Object.assign(portofolio_fadil[i], { "last_price": last_price, "persentase": persentase_fixed })
+        }
+        return view.render('portofolio', { portofolio_galih, portofolio_bagus, portofolio_fadil })
+
     }
     async price({ request, view, response, auth }) {
         // const data = await si.getSingleStockInfo('MNCN.JK')
@@ -488,7 +539,7 @@ class SahamController {
         const obj = hrg()
         return obj
     }
-    async epsTtm({ request, view, response, auth }){
+    async epsTtm({ request, view, response, auth }) {
         const code = [
             { "kode_saham": "AALI.JK" },
             { "kode_saham": "ACES.JK" },
@@ -591,7 +642,7 @@ class SahamController {
             { "kode_saham": "WSKT.JK" },
             { "kode_saham": "WTON.JK" },
         ]
-        const eps_sum =[]
+        const eps_sum = []
         for (var i = 0; i < code.length; i++) {
             const data = await yahooFinance.quote({
                 symbol: code[i].kode_saham,
@@ -601,7 +652,7 @@ class SahamController {
             const EPS = data.defaultKeyStatistics.trailingEps
             eps_sum.push(EPS)
         }
-    return response.json({eps_sum})
+        return response.json({ eps_sum })
     }
 }
 

@@ -19,6 +19,7 @@ const SahamController = require('../app/Controllers/Http/SahamController')
 const Route = use('Route')
 
 Route.get('/', ('SahamController.home'))
+Route.get('/portofolio', ('SahamController.portofolio'))
 Route.get('/analisis-all-emiten', ('SahamController.analisisAllEmiten'))
 Route.get('/analisis-single-emiten', ('SahamController.analisisSingleEmiten'))
 Route.post('/analisis-single-emiten', 'SahamController.analisisSingleEmitenFind')
