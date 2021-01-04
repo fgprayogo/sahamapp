@@ -33,21 +33,24 @@
                   <th scope="col">Harga Terakhir</th>
                   <th scope="col">%</th>
                   <th scope="col">Target Price</th>
+                  <th scope="col">Potential Profit</th>
                 </tr>
               </thead>
               <tbody>
                 @each(item in portofolio_galih)
                 <tr>
                     <th scope="row">{{$loop.index+1}}</th>
-                    <td class="col-md-3">{{item.kode_emiten}} </td>
-                    <td class="col-md-3">{{item.avg}}</td>
-                    <td class="col-md-3">{{item.last_price}}</td>
+                    <td class="col-md-2">{{item.kode_emiten}} </td>
+                    <td class="col-md-2">{{item.avg}}</td>
+                    <td class="col-md-2">{{item.last_price}}</td>
                       @if(item.persentase>0)
-                      <td class="col-md-3">+{{item.persentase}}%</td>
+                      <td class="col-md-2">+{{item.persentase}}%</td>
                       @else
-                      <td class="col-md-3">{{item.persentase}}%</td>
+                      <td class="col-md-2">{{item.persentase}}%</td>
                       @endif
-                    <td class="col-md-3">{{item.target_price}}</td>
+                    <td class="col-md-2">{{item.target_price}}</td>
+                    <td class="col-md-2">{{item.potential_profit}}%</td>
+
                   </tr>
                 @endeach
               </tbody>
@@ -68,21 +71,23 @@
                   <th scope="col">Harga Terakhir</th>
                   <th scope="col">%</th>
                   <th scope="col">Target Price</th>
+                  <th scope="col">Potential Profit</th>
                 </tr>
               </thead>
               <tbody>
                 @each(item in portofolio_bagus)
                 <tr>
                   <th scope="row">{{$loop.index+1}}</th>
-                  <td class="col-md-3">{{item.kode_emiten}} </td>
-                  <td class="col-md-3">{{item.avg}}</td>
-                  <td class="col-md-3">{{item.last_price}}</td>
+                  <td class="col-md-2">{{item.kode_emiten}} </td>
+                  <td class="col-md-2">{{item.avg}}</td>
+                  <td class="col-md-2">{{item.last_price}}</td>
                     @if(item.persentase>0)
-                    <td class="col-md-3">+{{item.persentase}}%</td>
+                    <td class="col-md-2">+{{item.persentase}}%</td>
                     @else
-                    <td class="col-md-3">{{item.persentase}}%</td>
+                    <td class="col-md-2">{{item.persentase}}%</td>
                     @endif
-                  <td class="col-md-3">{{item.target_price}}</td>
+                  <td class="col-md-2">{{item.target_price}}</td>
+                  <td class="col-md-2">{{item.potential_profit}}%</td>
                 </tr>
                 @endeach
               </tbody>
@@ -105,21 +110,23 @@
                   <th scope="col">Harga Terakhir</th>
                   <th scope="col">%</th>
                   <th scope="col">Target Price</th>
+                  <th scope="col">Potential Profit</th>
                 </tr>
               </thead>
               <tbody>
                 @each(item in portofolio_fadil)
                 <tr>
                   <th scope="row">{{$loop.index+1}}</th>
-                  <td class="col-md-3">{{item.kode_emiten}} </td>
-                  <td class="col-md-3">{{item.avg}}</td>
-                  <td class="col-md-3">{{item.last_price}}</td>
+                  <td class="col-md-2">{{item.kode_emiten}} </td>
+                  <td class="col-md-2">{{item.avg}}</td>
+                  <td class="col-md-2">{{item.last_price}}</td>
                     @if(item.persentase>0)
-                    <td class="col-md-3">+{{item.persentase}}%</td>
+                    <td class="col-md-2">+{{item.persentase}}%</td>
                     @else
-                    <td class="col-md-3">{{item.persentase}}%</td>
+                    <td class="col-md-2">{{item.persentase}}%</td>
                     @endif
-                  <td class="col-md-3">{{item.target_price}}</td>
+                  <td class="col-md-2">{{item.target_price}}</td>
+                  <td class="col-md-2">{{item.potential_profit}}%</td>
                 </tr>
                 @endeach
               </tbody>

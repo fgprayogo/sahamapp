@@ -299,8 +299,8 @@ class SahamController {
             let last_price = data_single.price.regularMarketPrice
             let persentase = ((last_price / portofolio_galih[i].avg) - 1) * 100
             let persentase_fixed = parseFloat(persentase).toFixed(2)
-
-            Object.assign(portofolio_galih[i], { "last_price": last_price, "persentase": persentase_fixed })
+            let potential_profit = ((portofolio_galih[i].target_price / portofolio_galih[i].avg) - 1) * 100
+            Object.assign(portofolio_galih[i], { "last_price": last_price, "persentase": persentase_fixed, "potential_profit": parseInt(potential_profit) })
         }
         for (let i = 0; i < portofolio_bagus.length; i++) {
             let data_single = await yahooFinance.quote({
@@ -310,8 +310,9 @@ class SahamController {
             const last_price = data_single.price.regularMarketPrice
             let persentase = ((last_price / portofolio_bagus[i].avg) - 1) * 100
             let persentase_fixed = parseFloat(persentase).toFixed(2)
+            let potential_profit = ((portofolio_bagus[i].target_price / portofolio_bagus[i].avg) - 1) * 100
 
-            Object.assign(portofolio_bagus[i], { "last_price": last_price, "persentase": persentase_fixed })
+            Object.assign(portofolio_bagus[i], { "last_price": last_price, "persentase": persentase_fixed, "potential_profit": parseInt(potential_profit) })
         }
         for (let i = 0; i < portofolio_fadil.length; i++) {
             let data_single = await yahooFinance.quote({
@@ -321,8 +322,9 @@ class SahamController {
             const last_price = data_single.price.regularMarketPrice
             let persentase = ((last_price / portofolio_fadil[i].avg) - 1) * 100
             let persentase_fixed = parseFloat(persentase).toFixed(2)
+            let potential_profit = ((portofolio_fadil[i].target_price / portofolio_fadil[i].avg) - 1) * 100
 
-            Object.assign(portofolio_fadil[i], { "last_price": last_price, "persentase": persentase_fixed })
+            Object.assign(portofolio_fadil[i], { "last_price": last_price, "persentase": persentase_fixed, "potential_profit": parseInt(potential_profit) })
         }
         return view.render('portofolio', { portofolio_galih, portofolio_bagus, portofolio_fadil })
 
