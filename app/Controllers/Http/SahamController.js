@@ -282,6 +282,7 @@ class SahamController {
         let portofolio_galih = res.data.portofolio_galih
         let portofolio_bagus = res.data.portofolio_bagus
         let portofolio_fadil = res.data.portofolio_fadil
+        
 
         for (let i = 0; i < portofolio_galih.length; i++) {
             let data_single = await yahooFinance.quote({
