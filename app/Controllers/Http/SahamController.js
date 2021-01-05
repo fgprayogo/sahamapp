@@ -2,6 +2,7 @@
 const Mail = use('Mail');
 var yahooFinance = require('yahoo-finance');
 var si = require('stock-info');
+const axios = require('axios');
 
 class SahamController {
     async analisisSingleEmiten({ request, view, response, auth }) {
@@ -277,19 +278,10 @@ class SahamController {
         return view.render('home')
     }
     async portofolio({ request, view, response, auth }) {
-        let portofolio_galih = [
-            { "kode_emiten": "BMTR.JK", "avg": 296, 'target_price': 670 },
-            { "kode_emiten": "MNCN.JK", "avg": 1165, 'target_price': 1227 },
-            { "kode_emiten": "PNLF.JK", "avg": 246, 'target_price': 319 },
-        ]
-        let portofolio_bagus = [
-            { "kode_emiten": "BMTR.JK", "avg": 294, 'target_price': 670 },
-            { "kode_emiten": "PNLF.JK", "avg": 244, 'target_price': 319 },
-        ]
-        let portofolio_fadil = [
-            { "kode_emiten": "BMTR.JK", "avg": 288, 'target_price': 670 },
-            { "kode_emiten": "PNLF.JK", "avg": 242, 'target_price': 319 },
-        ]
+        let res = await axios.get("https://my-json-server.typicode.com/fgprayogo/db-json-sahamapp/db")
+        let portofolio_galih = res.data.portofolio_galih
+        let portofolio_bagus = res.data.portofolio_bagus
+        let portofolio_fadil = res.data.portofolio_fadil
 
         for (let i = 0; i < portofolio_galih.length; i++) {
             let data_single = await yahooFinance.quote({
@@ -532,14 +524,13 @@ class SahamController {
         })
     }
     async hrg({ request, view, response, auth }) {
-        function hrg() {
-            var i = 10
-            var j = 12
-            var obj = { i, j }
-            return obj
-        }
-        const obj = hrg()
-        return obj
+
+        // return axios.get("https://my-json-server.typicode.com/fgprayogo/db-json-sahamapp/db/",{})
+        let res = await axios.get("https://my-json-server.typicode.com/fgprayogo/db-json-sahamapp/db")
+        let portofolio_galih = res.data.portofolio_galih
+        let portofolio_bagus = res.data.portofolio_bagus
+        let portofolio_fadil = res.data.portofolio_fadil
+        return response.json({ portofolio_galih })
     }
     async epsTtm({ request, view, response, auth }) {
         const code = [
