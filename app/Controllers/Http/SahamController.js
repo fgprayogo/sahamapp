@@ -724,12 +724,12 @@ class SahamController {
                 symbol: code[i].kode_saham,
                 modules: ['price', 'earnings', 'financialData', 'defaultKeyStatistics']  // ex: ['price', 'summaryDetail']
             });
-            if(!data || !data.defaultKeyStatistics || !data.price){
-                break
+            if(!data.price || !data.price.regularMarketPrice || !data.defaultKeyStatistics || !data.defaultKeyStatistics.trailingEps){
+                continue
             }
             const last_price = data.price.regularMarketPrice
             const EPS = data.defaultKeyStatistics.trailingEps
-            const DER = data.financialData.debtToEquity
+            // const DER = data.financialData.debtToEquity
 
             // const data = await si.getSingleStockInfo(code[i].kode_saham)
             // const last_price = data.regularMarketPrice
@@ -887,9 +887,14 @@ class SahamController {
         // const data = await si.getSingleStockInfo('MNCN.JK')
         // const data = yahoo.earningsGrowth('MNCN.JK')
         const data = await yahooFinance.quote({
-            symbol: 'BMTR.JK',
+            symbol: 'BMT.JK',
             modules: ['price', 'earnings', 'financialData', 'defaultKeyStatistics']  // ex: ['price', 'summaryDetail']
         });
+        if(data.price.symbol != "BMTR.JK" ){
+            return response.json({msg: "no data"})
+        }else{
+            return data
+        }
         return response.json({
             data
         })
