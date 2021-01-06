@@ -262,6 +262,13 @@ class SahamController {
         return view.render('analisis_all_emiten_kompas100', { undervalued_sum_10, undervalued_sum_20, undervalued_sum_30, undervalued_sum_40, undervalued_sum_50, stat })
     }
     async analisisAllEmitenAJ({ request, view, response, auth }) {
+        const cachedUndervaluedSum = await Redis.get('undervalued_sum')
+        if (cachedUndervaluedSum) {
+            const cachedData = await JSON.parse(cachedUndervaluedSum)
+            const {undervalued_sum_10, undervalued_sum_20, undervalued_sum_30, undervalued_sum_40, undervalued_sum_50} = cachedData
+            const stat = "Cached"
+            return view.render('analisis_all_emiten_kompas100', { undervalued_sum_10, undervalued_sum_20, undervalued_sum_30, undervalued_sum_40, undervalued_sum_50, stat })
+          }
         const code = [
             { "kode_saham": "AALI.JK" },
             { "kode_saham": "ABBA.JK" },
@@ -573,7 +580,6 @@ class SahamController {
             { "kode_saham": "JTPE.JK" },
 
         ]
-        var sum = []
         let undervalued_sum_10 = []
         let undervalued_sum_20 = []
         let undervalued_sum_30 = []
@@ -710,9 +716,20 @@ class SahamController {
         //     message.subject('UNDERVALUED STOCK!')
         // })
 
+        var undervalued_sum = {undervalued_sum_10, undervalued_sum_20, undervalued_sum_30, undervalued_sum_40, undervalued_sum_50}
+        await Redis.set('undervalued_sum', JSON.stringify(undervalued_sum))
+        Redis.expire('undervalued_sum', 3600)
+        const stat = "Not Cached"
         return view.render('analisis_all_emiten_aj', { undervalued_sum_10, undervalued_sum_20, undervalued_sum_30, undervalued_sum_40, undervalued_sum_50 })
     }
     async analisisAllEmitenKZ({ request, view, response, auth }) {
+        const cachedUndervaluedSum = await Redis.get('undervalued_sum')
+        if (cachedUndervaluedSum) {
+            const cachedData = await JSON.parse(cachedUndervaluedSum)
+            const {undervalued_sum_10, undervalued_sum_20, undervalued_sum_30, undervalued_sum_40, undervalued_sum_50} = cachedData
+            const stat = "Cached"
+            return view.render('analisis_all_emiten_kompas100', { undervalued_sum_10, undervalued_sum_20, undervalued_sum_30, undervalued_sum_40, undervalued_sum_50, stat })
+          }
         const code = [
             { "kode_saham": "KAEF.JK" },
             { "kode_saham": "KAYU.JK" },
@@ -1169,7 +1186,10 @@ class SahamController {
         //     message.to('fitrohgalih@gmail.com')
         //     message.subject('UNDERVALUED STOCK!')
         // })
-
+        var undervalued_sum = {undervalued_sum_10, undervalued_sum_20, undervalued_sum_30, undervalued_sum_40, undervalued_sum_50}
+        await Redis.set('undervalued_sum', JSON.stringify(undervalued_sum))
+        Redis.expire('undervalued_sum', 3600)
+        const stat = "Not Cached"
         return view.render('analisis_all_emiten_kz', { undervalued_sum_10, undervalued_sum_20, undervalued_sum_30, undervalued_sum_40, undervalued_sum_50 })
     }
     async analisisSingleEmitenFind({ request, view, response, auth }) {
