@@ -8,7 +8,249 @@ class SahamController {
     async analisisSingleEmiten({ request, view, response, auth }) {
         return view.render('analisis_single_emiten')
     }
-    async analisisAllEmiten({ request, view, response, auth }) {
+    async analisisAllEmitenKompas100({ request, view, response, auth }) {
+        const code = [
+            { "kode_saham": "AALI.JK" },
+            { "kode_saham": "ACES.JK" },
+            { "kode_saham": "ADHI.JK" },
+            { "kode_saham": "ADRO.JK" },
+            { "kode_saham": "AKRA.JK" },
+            { "kode_saham": "ANTM.JK" },
+            { "kode_saham": "APLN.JK" },
+            { "kode_saham": "ASII.JK" },
+            { "kode_saham": "ASSA.JK" },
+            { "kode_saham": "BBCA.JK" },
+            { "kode_saham": "BBKP.JK" },
+            { "kode_saham": "BBNI.JK" },
+            { "kode_saham": "BBRI.JK" },
+            { "kode_saham": "BBTN.JK" },
+            { "kode_saham": "BDMN.JK" },
+            { "kode_saham": "BEST.JK" },
+            { "kode_saham": "BJBR.JK" },
+            { "kode_saham": "BJTM.JK" },
+            { "kode_saham": "BMRI.JK" },
+            { "kode_saham": "BMTR.JK" },
+            { "kode_saham": "BNLI.JK" },
+            { "kode_saham": "BRIS.JK" },
+            { "kode_saham": "BRPT.JK" },
+            { "kode_saham": "BSDE.JK" },
+            { "kode_saham": "BTPS.JK" },
+            { "kode_saham": "BULL.JK" },
+            { "kode_saham": "CLEO.JK" },
+            { "kode_saham": "CPIN.JK" },
+            { "kode_saham": "CTRA.JK" },
+            { "kode_saham": "DMAS.JK" },
+            { "kode_saham": "ELSA.JK" },
+            { "kode_saham": "ERAA.JK" },
+            { "kode_saham": "EXCL.JK" },
+            { "kode_saham": "GGRM.JK" },
+            { "kode_saham": "GIAA.JK" },
+            { "kode_saham": "HKMU.JK" },
+            { "kode_saham": "HMSP.JK" },
+            { "kode_saham": "HOKI.JK" },
+            { "kode_saham": "ICBP.JK" },
+            { "kode_saham": "INAF.JK" },
+            { "kode_saham": "INCO.JK" },
+            { "kode_saham": "INDF.JK" },
+            { "kode_saham": "INDY.JK" },
+            { "kode_saham": "INKP.JK" },
+            { "kode_saham": "INTP.JK" },
+            { "kode_saham": "ISAT.JK" },
+            { "kode_saham": "ITMG.JK" },
+            { "kode_saham": "JPFA.JK" },
+            { "kode_saham": "JRPT.JK" },
+            { "kode_saham": "JSMR.JK" },
+            { "kode_saham": "KAEF.JK" },
+            { "kode_saham": "KBLI.JK" },
+            { "kode_saham": "KINO.JK" },
+            { "kode_saham": "KLBF.JK" },
+            { "kode_saham": "LINK.JK" },
+            { "kode_saham": "LPKR.JK" },
+            { "kode_saham": "LPPF.JK" },
+            { "kode_saham": "LSIP.JK" },
+            { "kode_saham": "MAIN.JK" },
+            { "kode_saham": "MAPI.JK" },
+            { "kode_saham": "MDKA.JK" },
+            { "kode_saham": "MEDC.JK" },
+            { "kode_saham": "MIKA.JK" },
+            { "kode_saham": "MNCN.JK" },
+            { "kode_saham": "MTDL.JK" },
+            { "kode_saham": "MYOR.JK" },
+            { "kode_saham": "PGAS.JK" },
+            { "kode_saham": "PNBN.JK" },
+            { "kode_saham": "PNLF.JK" },
+            { "kode_saham": "PSAB.JK" },
+            { "kode_saham": "PTBA.JK" },
+            { "kode_saham": "PTPP.JK" },
+            { "kode_saham": "PWON.JK" },
+            { "kode_saham": "RALS.JK" },
+            { "kode_saham": "SCMA.JK" },
+            { "kode_saham": "SIDO.JK" },
+            { "kode_saham": "SILO.JK" },
+            { "kode_saham": "SIMP.JK" },
+            { "kode_saham": "SMBR.JK" },
+            { "kode_saham": "SMGR.JK" },
+            { "kode_saham": "SMRA.JK" },
+            { "kode_saham": "SMSM.JK" },
+            { "kode_saham": "SPTO.JK" },
+            { "kode_saham": "SRIL.JK" },
+            { "kode_saham": "SSIA.JK" },
+            { "kode_saham": "SSMS.JK" },
+            { "kode_saham": "TBIG.JK" },
+            { "kode_saham": "TINS.JK" },
+            { "kode_saham": "TKIM.JK" },
+            { "kode_saham": "TLKM.JK" },
+            { "kode_saham": "TOWR.JK" },
+            { "kode_saham": "TPIA.JK" },
+            { "kode_saham": "UNTR.JK" },
+            { "kode_saham": "UNVR.JK" },
+            { "kode_saham": "WEGE.JK" },
+            { "kode_saham": "WIKA.JK" },
+            { "kode_saham": "WOOD.JK" },
+            { "kode_saham": "WSBP.JK" },
+            { "kode_saham": "WSKT.JK" },
+            { "kode_saham": "WTON.JK" },
+        ]
+        var sum = []
+        let undervalued_sum_10 = []
+        let undervalued_sum_20 = []
+        let undervalued_sum_30 = []
+        let undervalued_sum_40 = []
+        let undervalued_sum_50 = []
+
+        var obligasi_pemerintah_indo = 6
+        var obligasi_korporasi_indo = 8
+
+        //asumsi eps growth 10% stabil
+        function hrgWjr10(EPS) {
+            const PER_non_growth_company = 7
+            const eps_growth = 10
+            const calc_harga_wajar = (EPS * (PER_non_growth_company + eps_growth) * obligasi_pemerintah_indo) / obligasi_korporasi_indo
+            const harga_wajar = calc_harga_wajar - (calc_harga_wajar * 50 / 100)
+            return parseInt(harga_wajar)
+        }
+        //asumsi eps growth 20% stabil
+        function hrgWjr20(EPS) {
+            const PER_non_growth_company = 7
+            const eps_growth = 20
+            const calc_harga_wajar = (EPS * (PER_non_growth_company + eps_growth) * obligasi_pemerintah_indo) / obligasi_korporasi_indo
+            const harga_wajar = calc_harga_wajar - (calc_harga_wajar * 50 / 100)
+            return parseInt(harga_wajar)
+        }
+        //asumsi eps growth 30% stabil
+        function hrgWjr30(EPS) {
+            const PER_non_growth_company = 7
+            const eps_growth = 30
+            const calc_harga_wajar = (EPS * (PER_non_growth_company + eps_growth) * obligasi_pemerintah_indo) / obligasi_korporasi_indo
+            const harga_wajar = calc_harga_wajar - (calc_harga_wajar * 50 / 100)
+            return parseInt(harga_wajar)
+        }
+        //asumsi eps growth 40% stabil
+        function hrgWjr40(EPS) {
+            const PER_non_growth_company = 7
+            const eps_growth = 40
+            const calc_harga_wajar = (EPS * (PER_non_growth_company + eps_growth) * obligasi_pemerintah_indo) / obligasi_korporasi_indo
+            const harga_wajar = calc_harga_wajar - (calc_harga_wajar * 50 / 100)
+            return parseInt(harga_wajar)
+        }
+        //asumsi eps growth 50% stabil
+        function hrgWjr50(EPS) {
+            const PER_non_growth_company = 7
+            const eps_growth = 50
+            const calc_harga_wajar = (EPS * (PER_non_growth_company + eps_growth) * obligasi_pemerintah_indo) / obligasi_korporasi_indo
+            const harga_wajar = calc_harga_wajar - (calc_harga_wajar * 50 / 100)
+            return parseInt(harga_wajar)
+        }
+        for (var i = 0; i < code.length; i++) {
+            const data = await yahooFinance.quote({
+                symbol: code[i].kode_saham,
+                modules: ['price', 'earnings', 'financialData', 'defaultKeyStatistics']  // ex: ['price', 'summaryDetail']
+            });
+            // if(!data.price || !data.price.regularMarketPrice || !data.defaultKeyStatistics || !data.defaultKeyStatistics.trailingEps){
+            //     break
+            // }
+            // console.log(data.price.symbol)
+            const last_price = data.price.regularMarketPrice
+            const EPS = data.defaultKeyStatistics.trailingEps
+            // const DER = data.financialData.debtToEquity
+
+            // const data = await si.getSingleStockInfo(code[i].kode_saham)
+            // const last_price = data.regularMarketPrice
+            // const EPS = data.epsTrailingTwelveMonths
+
+            const code_saham = code[i].kode_saham
+
+            //memanggil fungsi
+            const harga_wajar_10 = hrgWjr10(EPS)
+            const harga_wajar_20 = hrgWjr20(EPS)
+            const harga_wajar_30 = hrgWjr30(EPS)
+            const harga_wajar_40 = hrgWjr40(EPS)
+            const harga_wajar_50 = hrgWjr50(EPS)
+
+            //low
+            if (last_price < harga_wajar_10) {
+                var status = "UNDERVALUED"
+                const persentase_kemurahan = ((harga_wajar_10 / last_price) - 1) * 100
+                // const persentase_kemurahan = 10
+                const undervalued = { "last_price": last_price, "harga_wajar": harga_wajar_10, "code_saham": code_saham, "persentase_kemurahan": parseInt(persentase_kemurahan), "status": status }
+                undervalued_sum_10.push(undervalued)
+            } else {
+                var status = "OVERVALUED"
+            }
+
+            //medium
+            if (last_price < harga_wajar_20) {
+                var status = "UNDERVALUED"
+                const persentase_kemurahan = ((harga_wajar_20 / last_price) - 1) * 100
+                // const persentase_kemurahan = 10
+                const undervalued = { "last_price": last_price, "harga_wajar": harga_wajar_20, "code_saham": code_saham, "persentase_kemurahan": parseInt(persentase_kemurahan), "status": status }
+                undervalued_sum_20.push(undervalued)
+            } else {
+                var status = "OVERVALUED"
+            }
+
+            //high
+            if (last_price < harga_wajar_30) {
+                var status = "UNDERVALUED"
+                const persentase_kemurahan = ((harga_wajar_30 / last_price) - 1) * 100
+                // const persentase_kemurahan = 10
+                const undervalued = { "last_price": last_price, "harga_wajar": harga_wajar_30, "code_saham": code_saham, "persentase_kemurahan": parseInt(persentase_kemurahan), "status": status }
+                undervalued_sum_30.push(undervalued)
+            } else {
+                var status = "OVERVALUED"
+            }
+
+            //high
+            if (last_price < harga_wajar_40) {
+                var status = "UNDERVALUED"
+                const persentase_kemurahan = ((harga_wajar_40 / last_price) - 1) * 100
+                // const persentase_kemurahan = 10
+                const undervalued = { "last_price": last_price, "harga_wajar": harga_wajar_40, "code_saham": code_saham, "persentase_kemurahan": parseInt(persentase_kemurahan), "status": status }
+                undervalued_sum_40.push(undervalued)
+            } else {
+                var status = "OVERVALUED"
+            }
+
+            //high
+            if (last_price < harga_wajar_50) {
+                var status = "UNDERVALUED"
+                const persentase_kemurahan = ((harga_wajar_50 / last_price) - 1) * 100
+                // const persentase_kemurahan = 10
+                const undervalued = { "last_price": last_price, "harga_wajar": harga_wajar_50, "code_saham": code_saham, "persentase_kemurahan": parseInt(persentase_kemurahan), "status": status }
+                undervalued_sum_50.push(undervalued)
+            } else {
+                var status = "OVERVALUED"
+            }
+        }
+        // await Mail.send('undervalued', { undervalued_sum_10, undervalued_sum_20, undervalued_sum_30 }, (message) => {
+        //     message.from('energen1995@gmail.com')
+        //     message.to('fitrohgalih@gmail.com')
+        //     message.subject('UNDERVALUED STOCK!')
+        // })
+
+        return view.render('analisis_all_emiten_kompas100', { undervalued_sum_10, undervalued_sum_20, undervalued_sum_30, undervalued_sum_40, undervalued_sum_50 })
+    }
+    async analisisAllEmitenAJ({ request, view, response, auth }) {
         const code = [
             { "kode_saham": "AALI.JK" },
             { "kode_saham": "ABBA.JK" },
@@ -47,7 +289,6 @@ class SahamController {
             { "kode_saham": "APII.JK" },
             { "kode_saham": "APLI.JK" },
             { "kode_saham": "APLN.JK" },
-            { "kode_saham": "APOL.JK" },
             { "kode_saham": "ARGO.JK" },
             { "kode_saham": "ARII.JK" },
             { "kode_saham": "ARKA.JK" },
@@ -107,7 +348,6 @@ class SahamController {
             { "kode_saham": "BKDP.JK" },
             { "kode_saham": "BKSL.JK" },
             { "kode_saham": "BKSW.JK" },
-            { "kode_saham": "BLTA.JK" },
             { "kode_saham": "BLTZ.JK" },
             { "kode_saham": "BLUE.JK" },
             { "kode_saham": "BMAS.JK" },
@@ -122,16 +362,13 @@ class SahamController {
             { "kode_saham": "BOGA.JK" },
             { "kode_saham": "BOLA.JK" },
             { "kode_saham": "BOLT.JK" },
-            { "kode_saham": "BORN.JK" },
             { "kode_saham": "BOSS.JK" },
             { "kode_saham": "BPFI.JK" },
             { "kode_saham": "BPII.JK" },
             { "kode_saham": "BPTR.JK" },
             { "kode_saham": "BRAM.JK" },
             { "kode_saham": "BRIS.JK" },
-            { "kode_saham": "BRMS.JK" },
             { "kode_saham": "BRNA.JK" },
-            { "kode_saham": "BRPT.JK" },
             { "kode_saham": "BSDE.JK" },
             { "kode_saham": "BSIM.JK" },
             { "kode_saham": "BSSR.JK" },
@@ -161,14 +398,11 @@ class SahamController {
             { "kode_saham": "CINT.JK" },
             { "kode_saham": "CITA.JK" },
             { "kode_saham": "CITY.JK" },
-            { "kode_saham": "CKRA.JK" },
             { "kode_saham": "CLAY.JK" },
             { "kode_saham": "CLEO.JK" },
             { "kode_saham": "CLPI.JK" },
             { "kode_saham": "CMNP.JK" },
-            { "kode_saham": "CMPP.JK" },
             { "kode_saham": "CNKO.JK" },
-            { "kode_saham": "CNTB.JK" },
             { "kode_saham": "CNTX.JK" },
             { "kode_saham": "COCO.JK" },
             { "kode_saham": "COWL.JK" },
@@ -183,8 +417,6 @@ class SahamController {
             { "kode_saham": "DART.JK" },
             { "kode_saham": "DAYA.JK" },
             { "kode_saham": "DEAL.JK" },
-            { "kode_saham": "DEFI.JK" },
-            { "kode_saham": "DEWA.JK" },
             { "kode_saham": "DFAM.JK" },
             { "kode_saham": "DGIK.JK" },
             { "kode_saham": "DIGI.JK" },
@@ -218,7 +450,6 @@ class SahamController {
             { "kode_saham": "ENVY.JK" },
             { "kode_saham": "EPMT.JK" },
             { "kode_saham": "ERAA.JK" },
-            { "kode_saham": "ERTX.JK" },
             { "kode_saham": "ESIP.JK" },
             { "kode_saham": "ESSA.JK" },
             { "kode_saham": "ESTI.JK" },
@@ -235,7 +466,6 @@ class SahamController {
             { "kode_saham": "FOOD.JK" },
             { "kode_saham": "FORU.JK" },
             { "kode_saham": "FORZ.JK" },
-            { "kode_saham": "FPNI.JK" },
             { "kode_saham": "FREN.JK" },
             { "kode_saham": "FUJI.JK" },
             { "kode_saham": "GAMA.JK" },
@@ -261,7 +491,6 @@ class SahamController {
             { "kode_saham": "HADE.JK" },
             { "kode_saham": "HDFA.JK" },
             { "kode_saham": "HDIT.JK" },
-            { "kode_saham": "HDTX.JK" },
             { "kode_saham": "HEAL.JK" },
             { "kode_saham": "HELI.JK" },
             { "kode_saham": "HERO.JK" },
@@ -275,7 +504,6 @@ class SahamController {
             { "kode_saham": "HRME.JK" },
             { "kode_saham": "HRTA.JK" },
             { "kode_saham": "HRUM.JK" },
-            { "kode_saham": "IATA.JK" },
             { "kode_saham": "IBFN.JK" },
             { "kode_saham": "IBST.JK" },
             { "kode_saham": "ICBP.JK" },
@@ -317,7 +545,6 @@ class SahamController {
             { "kode_saham": "ITIC.JK" },
             { "kode_saham": "ITMA.JK" },
             { "kode_saham": "ITMG.JK" },
-            { "kode_saham": "ITTG.JK" },
             { "kode_saham": "JAST.JK" },
             { "kode_saham": "JAWA.JK" },
             { "kode_saham": "JAYA.JK" },
@@ -333,8 +560,150 @@ class SahamController {
             { "kode_saham": "JSMR.JK" },
             { "kode_saham": "JSPT.JK" },
             { "kode_saham": "JTPE.JK" },
+
+        ]
+        var sum = []
+        let undervalued_sum_10 = []
+        let undervalued_sum_20 = []
+        let undervalued_sum_30 = []
+        let undervalued_sum_40 = []
+        let undervalued_sum_50 = []
+
+        var obligasi_pemerintah_indo = 6
+        var obligasi_korporasi_indo = 8
+
+        //asumsi eps growth 10% stabil
+        function hrgWjr10(EPS) {
+            const PER_non_growth_company = 7
+            const eps_growth = 10
+            const calc_harga_wajar = (EPS * (PER_non_growth_company + eps_growth) * obligasi_pemerintah_indo) / obligasi_korporasi_indo
+            const harga_wajar = calc_harga_wajar - (calc_harga_wajar * 50 / 100)
+            return parseInt(harga_wajar)
+        }
+        //asumsi eps growth 20% stabil
+        function hrgWjr20(EPS) {
+            const PER_non_growth_company = 7
+            const eps_growth = 20
+            const calc_harga_wajar = (EPS * (PER_non_growth_company + eps_growth) * obligasi_pemerintah_indo) / obligasi_korporasi_indo
+            const harga_wajar = calc_harga_wajar - (calc_harga_wajar * 50 / 100)
+            return parseInt(harga_wajar)
+        }
+        //asumsi eps growth 30% stabil
+        function hrgWjr30(EPS) {
+            const PER_non_growth_company = 7
+            const eps_growth = 30
+            const calc_harga_wajar = (EPS * (PER_non_growth_company + eps_growth) * obligasi_pemerintah_indo) / obligasi_korporasi_indo
+            const harga_wajar = calc_harga_wajar - (calc_harga_wajar * 50 / 100)
+            return parseInt(harga_wajar)
+        }
+        //asumsi eps growth 40% stabil
+        function hrgWjr40(EPS) {
+            const PER_non_growth_company = 7
+            const eps_growth = 40
+            const calc_harga_wajar = (EPS * (PER_non_growth_company + eps_growth) * obligasi_pemerintah_indo) / obligasi_korporasi_indo
+            const harga_wajar = calc_harga_wajar - (calc_harga_wajar * 50 / 100)
+            return parseInt(harga_wajar)
+        }
+        //asumsi eps growth 50% stabil
+        function hrgWjr50(EPS) {
+            const PER_non_growth_company = 7
+            const eps_growth = 50
+            const calc_harga_wajar = (EPS * (PER_non_growth_company + eps_growth) * obligasi_pemerintah_indo) / obligasi_korporasi_indo
+            const harga_wajar = calc_harga_wajar - (calc_harga_wajar * 50 / 100)
+            return parseInt(harga_wajar)
+        }
+        for (var i = 0; i < code.length; i++) {
+            const data = await yahooFinance.quote({
+                symbol: code[i].kode_saham,
+                modules: ['price', 'earnings', 'financialData', 'defaultKeyStatistics']  // ex: ['price', 'summaryDetail']
+            });
+            // if(!data.price || !data.price.regularMarketPrice || !data.defaultKeyStatistics || !data.defaultKeyStatistics.trailingEps){
+            //     break
+            // }
+            // console.log(data.price.symbol)
+            const last_price = data.price.regularMarketPrice
+            const EPS = data.defaultKeyStatistics.trailingEps
+            // const DER = data.financialData.debtToEquity
+
+            // const data = await si.getSingleStockInfo(code[i].kode_saham)
+            // const last_price = data.regularMarketPrice
+            // const EPS = data.epsTrailingTwelveMonths
+
+            const code_saham = code[i].kode_saham
+
+            //memanggil fungsi
+            const harga_wajar_10 = hrgWjr10(EPS)
+            const harga_wajar_20 = hrgWjr20(EPS)
+            const harga_wajar_30 = hrgWjr30(EPS)
+            const harga_wajar_40 = hrgWjr40(EPS)
+            const harga_wajar_50 = hrgWjr50(EPS)
+
+            //low
+            if (last_price < harga_wajar_10) {
+                var status = "UNDERVALUED"
+                const persentase_kemurahan = ((harga_wajar_10 / last_price) - 1) * 100
+                // const persentase_kemurahan = 10
+                const undervalued = { "last_price": last_price, "harga_wajar": harga_wajar_10, "code_saham": code_saham, "persentase_kemurahan": parseInt(persentase_kemurahan), "status": status }
+                undervalued_sum_10.push(undervalued)
+            } else {
+                var status = "OVERVALUED"
+            }
+
+            //medium
+            if (last_price < harga_wajar_20) {
+                var status = "UNDERVALUED"
+                const persentase_kemurahan = ((harga_wajar_20 / last_price) - 1) * 100
+                // const persentase_kemurahan = 10
+                const undervalued = { "last_price": last_price, "harga_wajar": harga_wajar_20, "code_saham": code_saham, "persentase_kemurahan": parseInt(persentase_kemurahan), "status": status }
+                undervalued_sum_20.push(undervalued)
+            } else {
+                var status = "OVERVALUED"
+            }
+
+            //high
+            if (last_price < harga_wajar_30) {
+                var status = "UNDERVALUED"
+                const persentase_kemurahan = ((harga_wajar_30 / last_price) - 1) * 100
+                // const persentase_kemurahan = 10
+                const undervalued = { "last_price": last_price, "harga_wajar": harga_wajar_30, "code_saham": code_saham, "persentase_kemurahan": parseInt(persentase_kemurahan), "status": status }
+                undervalued_sum_30.push(undervalued)
+            } else {
+                var status = "OVERVALUED"
+            }
+
+            //high
+            if (last_price < harga_wajar_40) {
+                var status = "UNDERVALUED"
+                const persentase_kemurahan = ((harga_wajar_40 / last_price) - 1) * 100
+                // const persentase_kemurahan = 10
+                const undervalued = { "last_price": last_price, "harga_wajar": harga_wajar_40, "code_saham": code_saham, "persentase_kemurahan": parseInt(persentase_kemurahan), "status": status }
+                undervalued_sum_40.push(undervalued)
+            } else {
+                var status = "OVERVALUED"
+            }
+
+            //high
+            if (last_price < harga_wajar_50) {
+                var status = "UNDERVALUED"
+                const persentase_kemurahan = ((harga_wajar_50 / last_price) - 1) * 100
+                // const persentase_kemurahan = 10
+                const undervalued = { "last_price": last_price, "harga_wajar": harga_wajar_50, "code_saham": code_saham, "persentase_kemurahan": parseInt(persentase_kemurahan), "status": status }
+                undervalued_sum_50.push(undervalued)
+            } else {
+                var status = "OVERVALUED"
+            }
+        }
+        // await Mail.send('undervalued', { undervalued_sum_10, undervalued_sum_20, undervalued_sum_30 }, (message) => {
+        //     message.from('energen1995@gmail.com')
+        //     message.to('fitrohgalih@gmail.com')
+        //     message.subject('UNDERVALUED STOCK!')
+        // })
+
+        return view.render('analisis_all_emiten_aj', { undervalued_sum_10, undervalued_sum_20, undervalued_sum_30, undervalued_sum_40, undervalued_sum_50 })
+    }
+    async analisisAllEmitenKZ({ request, view, response, auth }) {
+        const code = [
             { "kode_saham": "KAEF.JK" },
-            { "kode_saham": "KARW.JK" },
             { "kode_saham": "KAYU.JK" },
             { "kode_saham": "KBLI.JK" },
             { "kode_saham": "KBLM.JK" },
@@ -419,7 +788,6 @@ class SahamController {
             { "kode_saham": "MIKA.JK" },
             { "kode_saham": "MINA.JK" },
             { "kode_saham": "MIRA.JK" },
-            { "kode_saham": "MITI.JK" },
             { "kode_saham": "MKNT.JK" },
             { "kode_saham": "MKPI.JK" },
             { "kode_saham": "MLBI.JK" },
@@ -453,8 +821,6 @@ class SahamController {
             { "kode_saham": "NELY.JK" },
             { "kode_saham": "NFCX.JK" },
             { "kode_saham": "NICK.JK" },
-            { "kode_saham": "NIKL.JK" },
-            { "kode_saham": "NIPS.JK" },
             { "kode_saham": "NIRO.JK" },
             { "kode_saham": "NISP.JK" },
             { "kode_saham": "NOBU.JK" },
@@ -479,12 +845,9 @@ class SahamController {
             { "kode_saham": "PDES.JK" },
             { "kode_saham": "PEGE.JK" },
             { "kode_saham": "PEHA.JK" },
-            { "kode_saham": "PGAS.JK" },
             { "kode_saham": "PGLI.JK" },
             { "kode_saham": "PICO.JK" },
             { "kode_saham": "PJAA.JK" },
-            { "kode_saham": "PKPK.JK" },
-            { "kode_saham": "PLAS.JK" },
             { "kode_saham": "PLIN.JK" },
             { "kode_saham": "PNBN.JK" },
             { "kode_saham": "PNBS.JK" },
@@ -505,13 +868,11 @@ class SahamController {
             { "kode_saham": "PRAS.JK" },
             { "kode_saham": "PRDA.JK" },
             { "kode_saham": "PRIM.JK" },
-            { "kode_saham": "PSAB.JK" },
             { "kode_saham": "PSDN.JK" },
             { "kode_saham": "PSGO.JK" },
             { "kode_saham": "PSKT.JK" },
             { "kode_saham": "PSSI.JK" },
             { "kode_saham": "PTBA.JK" },
-            { "kode_saham": "PTIS.JK" },
             { "kode_saham": "PTPP.JK" },
             { "kode_saham": "PTRO.JK" },
             { "kode_saham": "PTSN.JK" },
@@ -521,7 +882,6 @@ class SahamController {
             { "kode_saham": "PWON.JK" },
             { "kode_saham": "PYFA.JK" },
             { "kode_saham": "PZZA.JK" },
-            { "kode_saham": "RAJA.JK" },
             { "kode_saham": "RALS.JK" },
             { "kode_saham": "RANC.JK" },
             { "kode_saham": "RBMS.JK" },
@@ -539,10 +899,8 @@ class SahamController {
             { "kode_saham": "SAME.JK" },
             { "kode_saham": "SAPX.JK" },
             { "kode_saham": "SATU.JK" },
-            { "kode_saham": "SCBD.JK" },
             { "kode_saham": "SCCO.JK" },
             { "kode_saham": "SCMA.JK" },
-            { "kode_saham": "SCPI.JK" },
             { "kode_saham": "SDMU.JK" },
             { "kode_saham": "SDPC.JK" },
             { "kode_saham": "SDRA.JK" },
@@ -573,7 +931,6 @@ class SahamController {
             { "kode_saham": "SMRA.JK" },
             { "kode_saham": "SMRU.JK" },
             { "kode_saham": "SMSM.JK" },
-            { "kode_saham": "SOCI.JK" },
             { "kode_saham": "SONA.JK" },
             { "kode_saham": "SOSS.JK" },
             { "kode_saham": "SOTS.JK" },
@@ -589,13 +946,11 @@ class SahamController {
             { "kode_saham": "SSTM.JK" },
             { "kode_saham": "STAR.JK" },
             { "kode_saham": "STTP.JK" },
-            { "kode_saham": "SUGI.JK" },
             { "kode_saham": "SULI.JK" },
             { "kode_saham": "SUPR.JK" },
             { "kode_saham": "SURE.JK" },
             { "kode_saham": "SWAT.JK" },
             { "kode_saham": "TALF.JK" },
-            { "kode_saham": "TAMU.JK" },
             { "kode_saham": "TARA.JK" },
             { "kode_saham": "TAXI.JK" },
             { "kode_saham": "TBIG.JK" },
@@ -627,9 +982,7 @@ class SahamController {
             { "kode_saham": "TPIA.JK" },
             { "kode_saham": "TPMA.JK" },
             { "kode_saham": "TRAM.JK" },
-            { "kode_saham": "TRIL.JK" },
             { "kode_saham": "TRIM.JK" },
-            { "kode_saham": "TRIO.JK" },
             { "kode_saham": "TRIS.JK" },
             { "kode_saham": "TRST.JK" },
             { "kode_saham": "TRUK.JK" },
@@ -724,9 +1077,10 @@ class SahamController {
                 symbol: code[i].kode_saham,
                 modules: ['price', 'earnings', 'financialData', 'defaultKeyStatistics']  // ex: ['price', 'summaryDetail']
             });
-            if(!data.price || !data.price.regularMarketPrice || !data.defaultKeyStatistics || !data.defaultKeyStatistics.trailingEps){
-                continue
-            }
+            // if(!data.price || !data.price.regularMarketPrice || !data.defaultKeyStatistics || !data.defaultKeyStatistics.trailingEps){
+            //     break
+            // }
+            // console.log(data.price.symbol)
             const last_price = data.price.regularMarketPrice
             const EPS = data.defaultKeyStatistics.trailingEps
             // const DER = data.financialData.debtToEquity
@@ -805,7 +1159,7 @@ class SahamController {
         //     message.subject('UNDERVALUED STOCK!')
         // })
 
-        return view.render('analisis_all_emiten', { undervalued_sum_10, undervalued_sum_20, undervalued_sum_30, undervalued_sum_40, undervalued_sum_50 })
+        return view.render('analisis_all_emiten_kz', { undervalued_sum_10, undervalued_sum_20, undervalued_sum_30, undervalued_sum_40, undervalued_sum_50 })
     }
     async analisisSingleEmitenFind({ request, view, response, auth }) {
         const kode_emiten = request.input('kode_emiten')
@@ -887,14 +1241,9 @@ class SahamController {
         // const data = await si.getSingleStockInfo('MNCN.JK')
         // const data = yahoo.earningsGrowth('MNCN.JK')
         const data = await yahooFinance.quote({
-            symbol: 'BMT.JK',
+            symbol: 'APOL.JK',
             modules: ['price', 'earnings', 'financialData', 'defaultKeyStatistics']  // ex: ['price', 'summaryDetail']
         });
-        if(data.price.symbol != "BMTR.JK" ){
-            return response.json({msg: "no data"})
-        }else{
-            return data
-        }
         return response.json({
             data
         })

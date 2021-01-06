@@ -20,7 +20,9 @@ const Route = use('Route')
 
 Route.get('/', ('SahamController.home'))
 Route.get('/portofolio', ('SahamController.portofolio'))
-Route.get('/analisis-all-emiten', ('SahamController.analisisAllEmiten'))
+Route.get('/analisis-all-emiten-kompas100', ('SahamController.analisisAllEmitenKompas100'))
+Route.get('/analisis-all-emiten-aj', ('SahamController.analisisAllEmitenAJ'))
+Route.get('/analisis-all-emiten-kz', ('SahamController.analisisAllEmitenKZ'))
 Route.get('/analisis-single-emiten', ('SahamController.analisisSingleEmiten'))
 Route.post('/analisis-single-emiten', 'SahamController.analisisSingleEmitenFind')
 
