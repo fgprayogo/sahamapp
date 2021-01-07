@@ -1195,13 +1195,18 @@ class SahamController {
     async analisisSingleEmitenFind({ request, view, response, auth }) {
         const kode_emiten = request.input('kode_emiten')
         const EPS_growth = request.input('eps_growth')
+        const EPS_TTM = request.input('eps_ttm')
 
         const data_single = await yahooFinance.quote({
             symbol: kode_emiten,
             modules: ['price', 'earnings', 'financialData', 'defaultKeyStatistics']  // ex: ['price', 'summaryDetail']
         });
         const last_price = data_single.price.regularMarketPrice
-        const EPS = data_single.defaultKeyStatistics.trailingEps
+        if(EPS_TTM){
+            var EPS = EPS_TTM
+        }else{
+            var EPS = data_single.defaultKeyStatistics.trailingEps
+        }
 
         const PER_non_growth_company = 7
         const eps_growth = parseInt(EPS_growth)
